@@ -2,8 +2,8 @@ let noClickCount = 0;
 const noBtn = document.getElementById('noButton');
 const yesBtn = document.getElementById('yesButton');
 const questionText = document.getElementById('questionText');
-const PASSCODE = "";
-const PHONE_NUMBER = "";
+const PASSCODE = "0936";
+const PHONE_NUMBER = "+12404139733";
 
 async function validatePasscode() {
     const input = document.getElementById('passcode').value;
