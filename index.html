@@ -29,11 +29,14 @@
         <source src="raindance.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Entry Overlay -->
     <div id="overlay" class="fixed inset-0 z-50 bg-rose-100 flex items-center justify-center text-center p-6">
-        <div class="max-w-md">
-            <h2 class="serif italic text-4xl text-rose-600 mb-6">I made something for you...</h2>
-            <button onclick="startExperience()" class="bg-rose-500 text-white px-10 py-4 rounded-full font-bold shadow-xl animate-pulse">
+        <div class="max-w-xs w-full glass p-8 rounded-3xl shadow-xl">
+            <h2 class="serif italic text-3xl text-rose-600 mb-6">I made something for you!!!</h2>
+            <h2 class="serif italic text-2xl text-rose-600 mb-6">Enter the last 4 digits of your phone to unlock ❤️</h2>
+            <input type="password" id="passcode" maxlength="4" placeholder="••••" 
+                class="w-full text-center text-2xl tracking-widest p-3 rounded-xl border-2 border-rose-200 focus:border-rose-400 outline-none mb-4">
+            <p id="errorMessage" class="text-rose-500 text-xs mb-4 hidden">That's not it, try again my love!</p>
+            <button onclick="validatePasscode()" class="w-full bg-rose-500 text-white px-8 py-4 rounded-full font-bold shadow-xl active:scale-95 transition-transform">
                 Open Message ❤️
             </button>
         </div>

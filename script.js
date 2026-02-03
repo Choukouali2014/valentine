@@ -2,6 +2,28 @@ let noClickCount = 0;
 const noBtn = document.getElementById('noButton');
 const yesBtn = document.getElementById('yesButton');
 const questionText = document.getElementById('questionText');
+const TARGET_HASH = "bcddf07cbefb6d79e144759392edeb28519a4fc2acb48bcaa8b35f721e4e955d";
+
+async function validatePasscode() {
+    const input = document.getElementById('passcode').value;
+    const errorMsg = document.getElementById('errorMessage');
+    
+    // Hash the input using SHA-256
+    const encoder = new TextEncoder();
+    const data = encoder.encode(input);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    
+    // Convert buffer to hex string
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashedInput = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+    if (hashedInput === TARGET_HASH) {
+        startExperience();
+    } else {
+        errorMsg.classList.remove('hidden');
+        document.getElementById('passcode').value = "";
+    }
+}
 
 function startExperience() {
     document.getElementById('overlay').style.display = 'none';
