@@ -2,33 +2,14 @@ let noClickCount = 0;
 const noBtn = document.getElementById('noButton');
 const yesBtn = document.getElementById('yesButton');
 const questionText = document.getElementById('questionText');
-const TARGET_HASH = "PLACEHOLDER_TARGET_HASH";
-
-// Encrypted phone number (XOR with key)
-const ENCRYPTED_PHONE = "PLACEHOLDER_ENCRYPTED_PHONE";
-const KEY = "PLACEHOLDER_KEY";
-
-function decryptPhone(encrypted, key) {
-    const bytes = encrypted.match(/.{2}/g).map(h => parseInt(h, 16));
-    let result = '';
-    for (let i = 0; i < bytes.length; i++) {
-        result += String.fromCharCode(bytes[i] ^ key.charCodeAt(i % key.length));
-    }
-    return result;
-}
+const PASSCODE = "PLACEHOLDER_PASSCODE";
+const PHONE_NUMBER = "PLACEHOLDER_PHONE_NUMBER";
 
 async function validatePasscode() {
     const input = document.getElementById('passcode').value;
     const errorMsg = document.getElementById('errorMessage');
-    
-    const encoder = new TextEncoder();
-    const data = encoder.encode(input);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashedInput = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-    if (hashedInput === TARGET_HASH) {
+    if (input === PASSCODE) {
         startExperience();
     } else {
         errorMsg.classList.remove('hidden');
@@ -91,8 +72,7 @@ yesBtn.addEventListener('click', () => {
     
     // Send notification via SMS
     const timestamp = new Date().toLocaleString();
-    const phoneNumber = decryptPhone(ENCRYPTED_PHONE, KEY);
-    window.location.href = `sms:${phoneNumber}?&body=I said YES! ❤️ (${timestamp})`;
+    window.location.href = `sms:${PHONE_NUMBER}?&body=I said YES! ❤️ (${timestamp})`;
 });
 
 // COUNTDOWN TIMER FIX

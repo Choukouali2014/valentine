@@ -12,9 +12,8 @@ jobs:
       
       - name: Inject secrets into script
         run: |
-          sed -i '' 's/PLACEHOLDER_TARGET_HASH/${{ secrets.TARGET_HASH }}/g' script.js
-          sed -i '' 's/PLACEHOLDER_KEY/${{ secrets.ENCRYPTION_KEY }}/g' script.js
-          sed -i '' 's/PLACEHOLDER_ENCRYPTED_PHONE/${{ secrets.ENCRYPTED_PHONE }}/g' script.js
+          sed -i '' 's/PLACEHOLDER_PASSCODE/${{ secrets.PASSCODE }}/g' script.js
+          sed -i '' 's/PLACEHOLDER_PHONE_NUMBER/${{ secrets.PHONE_NUMBER }}/g' script.js
       
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
