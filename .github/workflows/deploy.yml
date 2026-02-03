@@ -14,9 +14,25 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Inject secrets into script
+        env:
+          PASSCODE: ${{ secrets.PASSCODE }}
+          PHONE_NUMBER: ${{ secrets.PHONE_NUMBER }}
         run: |
-          sed -i "s/PLACEHOLDER_PASSCODE/${{ secrets.PASSCODE }}/g" script.js
-          sed -i "s|PLACEHOLDER_PHONE_NUMBER|${{ secrets.PHONE_NUMBER }}|g" script.js
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          
+          passcode = os.environ.get("PASSCODE", "")
+          phone = os.environ.get("PHONE_NUMBER", "")
+          if not passcode or not phone:
+            raise SystemExit("Missing PASSCODE or PHONE_NUMBER secret.")
+          
+          path = Path("script.js")
+          data = path.read_text()
+          data = data.replace("PLACEHOLDER_PASSCODE", passcode)
+          data = data.replace("PLACEHOLDER_PHONE_NUMBER", phone)
+          path.write_text(data)
+          PY
       
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
