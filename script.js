@@ -4,6 +4,19 @@ const yesBtn = document.getElementById('yesButton');
 const questionText = document.getElementById('questionText');
 const TARGET_HASH = "bcddf07cbefb6d79e144759392edeb28519a4fc2acb48bcaa8b35f721e4e955d";
 
+// Encrypted phone number (XOR with key)
+const ENCRYPTED_PHONE = "PLACEHOLDER_ENCRYPTED_PHONE";
+const KEY = "PLACEHOLDER_KEY";
+
+function decryptPhone(encrypted, key) {
+    const bytes = encrypted.match(/.{2}/g).map(h => parseInt(h, 16));
+    let result = '';
+    for (let i = 0; i < bytes.length; i++) {
+        result += String.fromCharCode(bytes[i] ^ key.charCodeAt(i % key.length));
+    }
+    return result;
+}
+
 async function validatePasscode() {
     const input = document.getElementById('passcode').value;
     const errorMsg = document.getElementById('errorMessage');
@@ -77,6 +90,11 @@ yesBtn.addEventListener('click', () => {
     if (window.confetti) {
         confetti({ particleCount: 200, spread: 100 });
     }
+    
+    // Send notification via SMS
+    const timestamp = new Date().toLocaleString();
+    const phoneNumber = decryptPhone(ENCRYPTED_PHONE, KEY);
+    window.location.href = `sms:${phoneNumber}?&body=I said YES! ❤️ (${timestamp})`;
 });
 
 // COUNTDOWN TIMER FIX
