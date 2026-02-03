@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A Special Message ❤️</title>
+    <!-- 1. LOAD LIBRARY FIRST -->
+    <script src="https://cdn.jsdelivr.net"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-rose-50 h-screen w-screen overflow-hidden flex items-center justify-center p-4">
+    <canvas id="petals-canvas"></canvas>
+
+    <!-- Floating Countdown -->
+    <div id="floatingCountdown" class="hidden fixed top-6 left-1/2 -translate-x-1/2 z-40 glass px-6 py-2 rounded-full shadow-lg border border-rose-200">
+        <div class="flex items-center gap-4 text-rose-600 font-bold">
+            <div class="flex gap-3">
+                <div class="text-center"><span id="days">00</span><p class="text-[8px]">DAYS</p></div>
+                <div class="text-center"><span id="hours">00</span><p class="text-[8px]">HRS</p></div>
+                <div class="text-center"><span id="mins">00</span><p class="text-[8px]">MINS</p></div>
+                <div class="text-center"><span id="secs">00</span><p class="text-[8px] text-rose-400">SECS</p></div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="loveSong" loop>
+        <source src="raindance.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Entry Overlay -->
+    <div id="overlay" class="fixed inset-0 z-50 bg-rose-100 flex items-center justify-center text-center p-6">
+        <div class="max-w-md">
+            <h2 class="serif italic text-4xl text-rose-600 mb-6">I made something for you...</h2>
+            <button onclick="startExperience()" class="bg-rose-500 text-white px-10 py-4 rounded-full font-bold shadow-xl animate-pulse">
+                Open Message ❤️
+            </button>
+        </div>
+    </div>
+
+    <!-- Card Content -->
+    <div id="proposalCard" class="hidden relative z-10 max-w-sm w-full glass p-8 rounded-3xl shadow-2xl text-center">
+        <h2 class="serif italic text-2xl text-gray-700 mb-2">My Baby,</h2>
+        <p class="text-gray-600 mb-8 text-xl">There is not a second I don't think about you.You're already my girlfriend 😅, but for this Valentine's, I wanted to ask properly...</p>
+        <h1 id="questionText" class="serif text-3xl font-bold text-rose-600 mb-12">Will you be my Valentine?</h1>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-6 h-32 relative">
+            <button id="yesButton" class="bg-rose-500 text-white font-bold py-4 px-12 rounded-full shadow-lg z-20">
+                YES! ❤️
+            </button>
+            <button id="noButton" class="bg-gray-400 text-white font-medium py-2 px-6 rounded-full shadow-md z-30">
+                No
+            </button>
+        </div>
+    </div>
+
+    <div id="successScreen" class="hidden relative z-10 max-w-sm text-center">
+        <h1 class="serif text-6xl text-rose-600 mb-4 animate-bounce">YES! ❤️🫶🏾</h1>
+        <p class="serif italic text-2xl text-gray-700">I love you my baby!</p>
+        <img src="https://media3.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" class="mx-auto mt-8 rounded-2xl w-48 shadow-lg">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
